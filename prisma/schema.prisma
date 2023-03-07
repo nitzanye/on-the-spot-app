@@ -9,3 +9,32 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  email    String  @unique
+  name     String?
+  imageUrl String?
+  // tickets  Ticket[]
+}
+
+// model Ticket {
+//   id       String @id @default(auto()) @map("_id") @db.ObjectId
+//   // title     String
+//   location String
+//   artist   String
+//   genre    String
+//   amount   Int
+//   price    Int
+//   // content   String?
+//   // published Boolean @default(false)
+//   user     User   @relation(fields: [userId], references: [id])
+//   userId   String @db.ObjectId
+// }
+
+// model User {
+//   id      Int      @id @default(autoincrement())
+//   email   String   @unique
+//   name    String?
+//   tickets Ticket[]
+// }
