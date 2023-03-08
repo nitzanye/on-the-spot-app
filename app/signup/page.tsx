@@ -10,6 +10,7 @@ import { Typography } from '@mui/material';
 import { Container } from '@mui/material';
 
 const Signup = () => {  
+
   return (
     <Container component="main" maxWidth="xs">
       <Box
