@@ -5,9 +5,9 @@ import prisma from '../../prisma/client';
 type Data = {
   data: {
     id: string;
-    name: string;
     email: string;
-    imageUrl: string;
+    name: string;
+    image: string;
   }[];
 }
 

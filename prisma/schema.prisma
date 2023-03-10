@@ -13,63 +13,70 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model Account {
-//   id                String  @id @default(auto()) @map("_id") @db.ObjectId
-//   userId            String
-//   type              String
-//   provider          String
-//   providerAccountId String
-//   refresh_token     String? @db.String
-//   access_token      String? @db.String
-//   expires_at        Int?
-//   token_type        String?
-//   scope             String?
-//   id_token          String? @db.String
-//   session_state     String?
-
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-//   @@unique([provider, providerAccountId])
-// }
-
-// model Session {
-//   id           String   @id @default(auto()) @map("_id") @db.ObjectId
-//   sessionToken String   @unique
-//   userId       String
-//   expires      DateTime
-//   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-// }
-
 model User {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  email    String  @unique
-  // emailVerified DateTime?
-  name     String?
-  imageUrl String?
-  //  accounts      Account[]
-  // sessions      Session[]
-  // tickets  Ticket[]
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  email         String    @unique
+  name          String?
+  image         String?
+  role          Role      @default(USER)
+  accounts      Account[]
+  sessions      Session[]
+  tickets       Ticket[]
 }
 
-// model VerificationToken {
-//   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-//   identifier String
-//   token      String   @unique
-//   expires    DateTime
+model Ticket {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  location  String
+  artist    String
+  genre     String
+  amount    Int
+  price     Int
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+}
 
-//   @@unique([identifier, token])
-// }
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
 
-// model Ticket {
-//   id       String @id @default(auto()) @map("_id") @db.ObjectId
-//   // title     String
-//   location String
-//   artist   String
-//   genre    String
-//   amount   Int
-//   price    Int
-//   // content   String?
-//   // published Boolean @default(false)
-//   user     User   @relation(fields: [userId], references: [id])
-//   userId   String @db.ObjectId
-// }
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
