@@ -6,7 +6,7 @@ type userProps = {
     id: string;
     name: string;
     email: string;
-    imageUrl: string;
+    image: string;
 }
 
 export default async function handler(
@@ -25,7 +25,7 @@ export default async function handler(
           data: {
             name: user.name,
             email: user.email,
-            imageUrl: user.imageUrl
+            image: user.image
           } 
         })
         res.status(200).json(data);

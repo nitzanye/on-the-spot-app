@@ -24,22 +24,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
-// export default function RootLayout({
-//   children,
-// }: {
-//   children: React.ReactNode
-// }) {
-//   return (
-//     <html lang="en" className='h-full scroll-smooth antialiased'>
-//     <body className={`flex h-full flex-col ${montserrat.className}`}>
-//       <Nav />
-//       {/* <Header /> */}
-//       <main className='grow'>
-//         {children}
-//       </main>
-//       <Footer />
-//     </body>
-//     </html>
-//   )
-// }

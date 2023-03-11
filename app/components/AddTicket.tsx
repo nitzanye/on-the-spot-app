@@ -3,7 +3,8 @@
 
 import React ,{ useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import toast from 'react-hot-toast';
 
 // IMPORT MUI ELEMENTS
 import { Button } from '@mui/material';
@@ -33,12 +34,32 @@ const AddTickect = () => {
   const [amount, setAmount] = useState(1);
   const [price, setPrice] = useState<number>(0);
   const [isDisabled, setIsDisabled] = useState(false);
+  let toastTicketId: string;
 
   // CREATE A TICKET
-  const { mutate } = useMutation(async (data: TicketData) => {
-    const res = await axios.post('/api/tickets/addTicket', data);
-    return res.data;
-  });
+  const { mutate } = useMutation(
+    async (data: TicketData) => 
+      await axios.post('/api/tickets/addTicket', data),
+  {
+      onError: (error) => {
+        if (error instanceof AxiosError) {
+          toast.error(error?.response?.data.message, { id: toastTicketId })
+        }
+        setIsDisabled(false)
+      },
+      onSuccess: (data) => {
+        toast.success('Ticket has been made', { id: toastTicketId })
+        console.log(data);
+        setLocaion('');
+        setArtist('');
+        setGenre('pop');
+        setAmount(1);
+        setPrice(0);
+        setIsDisabled(false);
+      },
+    }
+  )
+
 
   const handleChangeGenre = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGenre(event.target.value);
@@ -48,6 +69,7 @@ const AddTickect = () => {
   const submitTicket = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsDisabled(true);
+    toastTicketId = toast.loading("Creating your ticket", { id: toastTicketId })
     mutate({ location, artist, genre, amount, price });
   } 
 
@@ -58,7 +80,7 @@ const AddTickect = () => {
       >
         <Typography component="h1" variant='h5'>Sell Your Tickets</Typography>
       </Box>
-    <Box onSubmit={submitTicket} className='p-4 mb-5' component="form" sx={{ mt: 3 }}>
+    <Box onSubmit={submitTicket} className='p-4 mb-5' component="form" sx={{ mt: 5 }}>
       <Grid>
           <Grid>
             <TextField
@@ -127,8 +149,8 @@ const AddTickect = () => {
                   className='w-full shadow-md mt-5 mb-5'
                   name="price"
                   required
-                  value={price || null}
-                  label="Price"
+                  value={price || 0}
+                  label="Price Per Ticket"
                   onChange={(e) => setPrice(parseInt(e.target.value))}
         ></TextField>
       </Grid>
