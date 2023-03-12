@@ -11,7 +11,7 @@ const Footer = async () => {
   console.log(session);
 
   return (
-    <footer className='z-10 bg-stone-300 py-4 text-center text-white'>
+    <footer className='z-10 bg-stone-300 py-4 text-center text-gray-600'>
       <div className='container'>
         <p className='text-sm uppercase'>{`@${now.getFullYear()} On-The-Spot App. All rights reserved`}</p>
         <div className=' ml-auto mr-auto flex justify-center gap-8'>

@@ -32,6 +32,7 @@ model Ticket {
   updatedAt DateTime @updatedAt
   published Boolean  @default(false)
   location  String
+  date      String
   artist    String
   genre     String
   amount    Int

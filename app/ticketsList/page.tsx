@@ -3,6 +3,7 @@
 import Link from "next/link";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import Ticket from '../components/Ticket';
 
 // Fetch all tickets
 const allTickets = async () => {  
@@ -20,10 +21,24 @@ const TicketsList = () => {
   if (isLoading) return 'Loading...'
   console.log(data);
   return (
-    <>
+    <main>
       <h1>List of all the tickets</h1>
+      {data?.map((ticket) => (
+        <Ticket 
+          key={ticket.id} 
+          name={ticket.user.name}
+          ticketLocation={ticket.location} 
+          ticketDate = {ticket.date}
+          ticketArtist={ticket.artist} 
+          // ticketGenre={ticket.genre}
+          ticketAmount={ticket.amount}
+          ticketPrice={ticket.price}
+          avatar={ticket.user.image}
+          id={ticket.id}
+          />
+      ))}
       <Link href="/">To The Home Page</Link>
-    </>
+    </main>
   )
 }
 

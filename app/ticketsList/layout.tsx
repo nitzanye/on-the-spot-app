@@ -4,10 +4,10 @@ export default function TicketsListLayout({
     children: React.ReactNode
   }) {
     return (
-      <>
+  
         <main >
           {children}
         </main>
-      </>
+
     )
   }

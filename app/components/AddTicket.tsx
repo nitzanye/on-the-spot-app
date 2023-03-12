@@ -20,6 +20,7 @@ import { RadioGroup } from '@mui/material';
 import { Radio } from '@mui/material';
 
 interface TicketData {
+  date: string;
   location: string;
   artist: string;
   genre: string;
@@ -28,6 +29,7 @@ interface TicketData {
 }
 
 const AddTickect = () => {
+  const [date, setDate] = useState('');
   const [location, setLocaion] = useState('');
   const [artist, setArtist] = useState('');
   const [genre, setGenre] = useState('pop');
@@ -61,6 +63,7 @@ const AddTickect = () => {
       onSuccess: (data) => {
         toast.success('Ticket has been made', { id: toastTicketId })
         console.log(data);
+        setDate('');
         setLocaion('');
         setArtist('');
         setGenre('pop');
@@ -74,8 +77,8 @@ const AddTickect = () => {
   const submitTicket = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsDisabled(true);
-    toastTicketId = toast.loading("Creating your ticket", { id: toastTicketId })
-    mutate({ location, artist, genre, amount, price });
+    // toastTicketId = toast.loading("Creating your ticket", { id: toastTicketId })
+    mutate({ date, location, artist, genre, amount, price });
   } 
 
 
@@ -86,7 +89,7 @@ const AddTickect = () => {
       >
         <Typography component="h1" variant='h5'>Sell Your Tickets</Typography>
       </Box>
-    <Box onSubmit={submitTicket} className='p-4 mb-5' component="form" sx={{ mt: 5 }}>
+    <Box onSubmit={submitTicket} className='p-4 mb-5' component="form" sx={{ mt: 6 }}>
       <Grid>
           <Grid>
             <TextField
@@ -101,6 +104,17 @@ const AddTickect = () => {
                 ></TextField>
           </Grid>
         
+          <Grid>
+            <TextField
+                  onChange={(e) => setDate(e.target.value)}
+                  className='shadow-md mb-5'
+                  name="date"
+                  required
+                  value={date}
+                  fullWidth
+                  label='Date'
+                ></TextField>
+          </Grid>
         <Grid>
           <TextField
                   onChange={(e) => setArtist(e.target.value)}

@@ -16,6 +16,7 @@ export default async function handler(
     }
 
     const location: string = req.body.location
+    const date: string = req.body.date
     const artist: string = req.body.artist
     const genre: string = req.body.genre
     const amount: number = req.body.amount
@@ -45,6 +46,7 @@ export default async function handler(
       const result = await prisma.ticket.create({
         data: {
           location,
+          date,
           artist,
           genre,
           amount,

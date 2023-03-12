@@ -10,6 +10,9 @@ export default async function handler(
 
     // Fetch all Ticket - Only if its ADMIN
     // if not fetch only the data that comes in the specifiqe req of the user (after BUY btn was clicked)
+    
+
+    // filter by incoming shows - date !
     try {
       const data = await prisma.ticket.findMany({
         include: {
