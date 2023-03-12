@@ -36,6 +36,17 @@ const AddTickect = () => {
   const [isDisabled, setIsDisabled] = useState(false);
   let toastTicketId: string;
 
+
+  const handleChangeGenre = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGenre(event.target.value);
+  };
+
+  const handleDecrement = () => {
+    if (amount > 1) {
+      setAmount(amount - 1);
+    }
+  }
+
   // CREATE A TICKET
   const { mutate } = useMutation(
     async (data: TicketData) => 
@@ -60,18 +71,13 @@ const AddTickect = () => {
     }
   )
 
-
-  const handleChangeGenre = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGenre(event.target.value);
-  };
-
-
   const submitTicket = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsDisabled(true);
     toastTicketId = toast.loading("Creating your ticket", { id: toastTicketId })
     mutate({ location, artist, genre, amount, price });
   } 
+
 
   return (
     <Container  className="bg-[#f5f5f4] rounded-md shadow-md" maxWidth="xs">
@@ -139,7 +145,7 @@ const AddTickect = () => {
               </Grid>
             
               <Grid>
-                <Button className='shadow-md text-center' onClick={() => setAmount(amount - 1)}>-</Button>
+                <Button className='shadow-md text-center' onClick={handleDecrement}>-</Button>
               </Grid>
           </Grid>
       </Grid>

@@ -33,6 +33,7 @@ export default async function handler(
         .json({message: 'Please do not leave this empty'}) 
     }
 
+   
  
     if (!prismaUser) {
       return res.status(404).json({ message: 'User not ound' });
