@@ -34,13 +34,10 @@ export default async function handler(
         .json({message: 'Please do not leave this empty'}) 
     }
 
-   
- 
     if (!prismaUser) {
       return res.status(404).json({ message: 'User not ound' });
     } 
     
-
     // Create Ticket
     try{
       const result = await prisma.ticket.create({
@@ -56,7 +53,7 @@ export default async function handler(
       })
       res.status(200).json(result);
     } catch (err) {
-      res.status(403).json({err: 'Error has occurd whilst making a ticket'})
+      res.status(403).json({err: 'Error has occurd while making a ticket'})
     }
   }
 }

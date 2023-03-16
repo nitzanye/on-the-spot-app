@@ -4,6 +4,7 @@ import Link from "next/link";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Ticket from '../components/Ticket';
+import { TicketsType } from "../types/Tickets";
 
 // Fetch all tickets
 const allTickets = async () => {  
@@ -12,14 +13,14 @@ const allTickets = async () => {
 }
 
 const TicketsList = () => {
-  const { data, error, isLoading } = useQuery({
+  const { data, error, isLoading } = useQuery<TicketsType[]>({
     queryFn: allTickets,
     queryKey: ["tickets"],
   })
 
   if (error) return error
   if (isLoading) return 'Loading...'
-  console.log(data);
+  // console.log(data);
   return (
     <main>
       <h1>List of all the tickets</h1>

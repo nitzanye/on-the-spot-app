@@ -19,6 +19,8 @@ import { FormControlLabel } from '@mui/material';
 import { RadioGroup } from '@mui/material';
 import { Radio } from '@mui/material';
 
+import { TicketsType } from '../types/Tickets';
+
 interface TicketData {
   date: string;
   location: string;
@@ -87,9 +89,9 @@ const AddTickect = () => {
     <Box
         sx={{ marginTop: 5, display: 'flex', flexDirection: 'column', alignItems: 'center'}}
       >
-        <Typography component="h1" variant='h5'>Sell Your Tickets</Typography>
+        <Typography component="h1" className='text-black' variant='h5'>Sell Your Tickets</Typography>
       </Box>
-    <Box onSubmit={submitTicket} className='p-4 mb-5' component="form" sx={{ mt: 6 }}>
+    <Box onSubmit={submitTicket} className='p-4 mb-5 mt-2' component="form" sx={{ mt: 6 }}>
       <Grid>
           <Grid>
             <TextField
@@ -137,9 +139,9 @@ const AddTickect = () => {
             // onChange={(e) => setGenre(e.target.value)}
             
           >
-            <FormControlLabel value="pop" control={<Radio />} label="Pop" />
-            <FormControlLabel value="rock" control={<Radio />} label="Rock" />
-            <FormControlLabel value="hiphop" control={<Radio />} label="Hiphop" />
+            <FormControlLabel className='text-black' value="pop" control={<Radio />} label="Pop" />
+            <FormControlLabel className='text-black' value="rock" control={<Radio />} label="Rock" />
+            <FormControlLabel className='text-black' value="hiphop" control={<Radio />} label="Hiphop" />
           </RadioGroup>
         </FormControl>
 
