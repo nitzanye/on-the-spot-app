@@ -2,7 +2,8 @@
 
 
 import React ,{ useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+// import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import axios, { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
 
@@ -38,6 +39,7 @@ const AddTickect = () => {
   const [amount, setAmount] = useState(1);
   const [price, setPrice] = useState<number>(0);
   const [isDisabled, setIsDisabled] = useState(false);
+  const queryClient = useQueryClient();
   let toastTicketId: string;
 
 
@@ -64,7 +66,7 @@ const AddTickect = () => {
       },
       onSuccess: (data) => {
         toast.success('Ticket has been made', { id: toastTicketId })
-        console.log(data);
+        queryClient.invalidateQueries(["tickets"]);
         setDate('');
         setLocaion('');
         setArtist('');

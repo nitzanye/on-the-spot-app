@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
+import {useQuery} from 'react-query';
 import Ticket from '../components/Ticket';
 import { TicketsType } from "../types/Tickets";
 
@@ -17,6 +18,8 @@ const TicketsList = () => {
     queryFn: allTickets,
     queryKey: ["tickets"],
   })
+
+ 
 
   if (error) return error
   if (isLoading) return 'Loading...'

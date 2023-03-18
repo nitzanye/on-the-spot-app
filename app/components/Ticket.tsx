@@ -1,12 +1,17 @@
 'use client'
 
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { capitalizedWords } from '../utils/constance';
+
 
 const Ticket = ({ avatar, name, ticketDate, ticketLocation, ticketArtist, ticketAmount, ticketPrice, id}) => {
 
   const [connectBtnClicked, setConnectBtnClicked] = useState(false);
+
+  const upperCaseArtist = capitalizedWords(ticketArtist);
+  const upperCaseLocation = capitalizedWords(ticketLocation);
 
   const handleToggleBtn = () => {
     setConnectBtnClicked(!connectBtnClicked);
@@ -26,8 +31,8 @@ const Ticket = ({ avatar, name, ticketDate, ticketLocation, ticketArtist, ticket
         <div className="flex gap-7 mt-2 mb-2 items-center">
           <h3 className="text-2xl font-bold">{ticketDate}</h3>
           <div>
-            <h4 className="text-xl text-[#2dd4bf] font-bold">{ticketLocation}</h4>
-            <h5>{ticketArtist}</h5>
+            <h4 className="text-xl text-[#2dd4bf] font-bold">{upperCaseLocation}</h4>
+            <h5>{upperCaseArtist}</h5>
             <p>{ticketAmount} tickets</p>
             <p>${ticketPrice} per ticket</p>
           </div>
