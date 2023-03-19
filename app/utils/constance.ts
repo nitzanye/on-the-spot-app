@@ -14,3 +14,8 @@ export const capitalizedWords = (str: string) => {
   .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
   .join(' ');
 }
+
+// Cleanup Date 
+export const cleanupDateStr = (str: string) => {
+  return str.substring(0, 10);
+}

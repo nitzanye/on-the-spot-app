@@ -23,7 +23,7 @@ const TicketsList = () => {
 
   if (error) return error
   if (isLoading) return 'Loading...'
-  // console.log(data);
+  console.log(data);
   return (
     <main>
       <h1>List of all the tickets</h1>

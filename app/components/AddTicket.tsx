@@ -20,7 +20,10 @@ import { FormControlLabel } from '@mui/material';
 import { RadioGroup } from '@mui/material';
 import { Radio } from '@mui/material';
 
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 import { TicketsType } from '../types/Tickets';
+import { Dayjs } from 'dayjs';
 
 interface TicketData {
   date: string;
@@ -32,7 +35,7 @@ interface TicketData {
 }
 
 const AddTickect = () => {
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState<Dayjs | null>(null);
   const [location, setLocaion] = useState('');
   const [artist, setArtist] = useState('');
   const [genre, setGenre] = useState('pop');
@@ -67,7 +70,7 @@ const AddTickect = () => {
       onSuccess: (data) => {
         toast.success('Ticket has been made', { id: toastTicketId })
         queryClient.invalidateQueries(["tickets"]);
-        setDate('');
+        setDate(null);
         setLocaion('');
         setArtist('');
         setGenre('pop');
@@ -108,7 +111,15 @@ const AddTickect = () => {
                 ></TextField>
           </Grid>
         
-          <Grid>
+          <DatePicker 
+            disablePast 
+            className='mb-5 mt-2 w-full' 
+            // views={['day', 'month', 'year']} 
+            format="MM-DD-YYYY"
+            value={date} 
+            onChange={(newDate) => setDate(newDate)} />
+
+          {/* <Grid>
             <TextField
                   onChange={(e) => setDate(e.target.value)}
                   className='shadow-md mb-5'
@@ -118,7 +129,7 @@ const AddTickect = () => {
                   fullWidth
                   label='Date'
                 ></TextField>
-          </Grid>
+          </Grid> */}
         <Grid>
           <TextField
                   onChange={(e) => setArtist(e.target.value)}
@@ -148,7 +159,7 @@ const AddTickect = () => {
         </FormControl>
 
         <Grid className='mt-3' container direction="row"  alignItems="center"  justifyContent="center">
-          <Grid  xs={10}>
+          <Grid item xs={10}>
             <TextField
                     className=' w-11/12 shadow-md mt-5 mb-5'
                     name="amount"
@@ -157,7 +168,7 @@ const AddTickect = () => {
                     label='Amount'
                 ></TextField>
           </Grid>
-          <Grid xs={2}>
+          <Grid item xs={2}>
               <Grid>
                   <Button className='shadow-md text-center' onClick={() => setAmount(amount + 1)}>+</Button>
               </Grid>

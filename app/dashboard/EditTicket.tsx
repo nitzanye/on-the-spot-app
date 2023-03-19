@@ -1,9 +1,12 @@
 'use client'
 
+import axios from 'axios';
 import Image from 'next/image';
 import {useState} from 'react';
-import { capitalizedWords } from '../utils/constance';
+import { useMutation, useQueryClient } from 'react-query';
+import { capitalizedWords, cleanupDateStr } from '../utils/constance';
 import Toggle from './Toggle';
+import toast from 'react-hot-toast';
 
 type EditTicket = {
   id: string
@@ -17,18 +20,41 @@ type EditTicket = {
 }
 
 const EditTicket = ({id, avatar, name, date, artist, location, amount, price}: EditTicket) => {
-
   const upperCaseArtist = capitalizedWords(artist);
   const upperCaseLocation = capitalizedWords(location);
+  const shorterDate = cleanupDateStr(date);
 
-  const deleteTicket = (e) => {
-    e.preventDefault();
-    return Toggle 
-  }
+  const [toggle, setToggle] = useState(false);
+  const queryClient = useQueryClient();
+  let deleteTicketId: string;
+
+
+  // Delete Ticket 
+  const {mutate} = useMutation(
+    async (id: string) => 
+      await axios.delete('/api/tickets/deleteTicket', { data: id }),
+      {
+        onError: (error) => {
+          console.log(error);
+          toast.error('Error deleting that ticket', { id: deleteTicketId });
+        },
+        onSuccess: (data) => {
+          console.log(data);
+          toast.success('Ticket has been deleted.', { id: deleteTicketId });
+          queryClient.invalidateQueries("getAuthTickets");
+   
+        },
+      }
+    )
+
+    const deleteTicket = () => {
+      deleteTicketId = toast.loading('Deleting your ticket', { id: deleteTicketId })
+      mutate(id);
+    }
 
   return (
-  <>
-    <div className='bg-gray-300 my-8 p-8 rounded-lg'>
+  <div >
+    <div className='bg-gray-300 my-8  p-8 rounded-lg'>
       <div className='flex items-center gap-4'>
         <Image width={32} height={32} src={avatar} alt="avatar" className='rounded-full' />
         <h3 className='font-bold'>{name}</h3>
@@ -37,18 +63,18 @@ const EditTicket = ({id, avatar, name, date, artist, location, amount, price}: E
       <div className='flex items-center gap-4'>
         <p>{upperCaseLocation}</p>
         <p>{upperCaseArtist}</p>
-        <p>{date}</p>
+        <p>{shorterDate}</p>
         <p>{amount}</p>
         <p>{`$${price}`}</p>
         <p>{id}</p>
       </div>
   
       <div className='flex items-center gap-4'>
-        <button className='text-sm font-bold text-blue-500' >Delete</button>
+        <button onClick={(e) => setToggle(true)} className='bg-pink-800 my-2 p-2 rounded-md shadow-md text-sm font-bold text-white' >Delete</button>
       </div>
     </div>
-    <Toggle/>
-  </>
+    {toggle && <Toggle deleteTicket={deleteTicket} setToggle={setToggle}/>}
+  </div>
   );
 }
 

@@ -19,7 +19,7 @@ export default function MyTickets() {
     fetchAuthTickets
 )
   if (isLoading) return <h1>Tickets are loading...</h1>
-  if (data) console.log(data)
+  // if (data) console.log(data)
   return (
     <div>
       {data?.tickets?.map((ticket) => (
