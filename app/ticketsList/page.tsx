@@ -19,8 +19,6 @@ const TicketsList = () => {
     queryKey: ["tickets"],
   })
 
- 
-
   if (error) return error
   if (isLoading) return 'Loading...'
   console.log(data);
@@ -28,7 +26,7 @@ const TicketsList = () => {
     <main>
       <h1>List of all the tickets</h1>
       {data?.map((ticket) => (
-        <Ticket 
+        <Ticket
           key={ticket.id} 
           name={ticket.user.name}
           ticketLocation={ticket.location} 

@@ -4,7 +4,7 @@ export default function SellLayout({
     children: React.ReactNode
   }) {
     return (
-      <main className='bg-[#0e555a] min-h-screen grid place-content-center text-white'>
+      <main className='bg-[#D0BCFF] min-h-screen grid place-content-center text-white'>
           {children}
       </main>
     )

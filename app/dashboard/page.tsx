@@ -14,8 +14,8 @@ export default async function Dashboard() {
       <h1 className="text-2xl font-bold my-4">Welcome back {session?.user?.name}</h1>
       <MyTickets />
       <div className="flex items-center  justify-around">
-        <Link className="bg-[#d3207d] shadow-lg py-2 px-4 rounded-md text-white font-semibold text-sm" href='/buy'>Get More Tickets</Link>
-        <Link className="bg-[#0e555a] shadow-lg py-2 px-4 rounded-md text-white font-semibold text-sm" href='/sell'>Sell More Tickets</Link>
+        <Link className="bg-[#EFB8C8] shadow-lg py-2 px-4 rounded-md text-gray-700 font-semibold text-sm" href='/buy'>Get More Tickets</Link>
+        <Link className="bg-[#D0BCFF] shadow-lg py-2 px-4 rounded-md text-gray-700 font-semibold text-sm" href='/sell'>Sell More Tickets</Link>
       </div>
     </main>
   )

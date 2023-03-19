@@ -6,7 +6,7 @@ export default function BuyLayout({
     children: React.ReactNode
   }) {
     return (
-      <main className='bg-[#810043] min-h-screen grid place-content-center text-white'>
+      <main className='bg-[#EFB8C8] min-h-screen grid place-content-center text-gray-700'>
         {children}
       </main>
     )

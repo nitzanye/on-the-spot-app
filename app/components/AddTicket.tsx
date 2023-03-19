@@ -1,6 +1,5 @@
 'use client'
 
-
 import React ,{ useState } from 'react';
 // import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMutation, useQueryClient } from 'react-query';
@@ -90,7 +89,7 @@ const AddTickect = () => {
 
 
   return (
-    <Container  className="bg-[#f5f5f4] rounded-md shadow-md" maxWidth="xs">
+    <Container className="bg-[#f5f5f4] rounded-md shadow-lg" maxWidth="xs">
     <Box
         sx={{ marginTop: 5, display: 'flex', flexDirection: 'column', alignItems: 'center'}}
       >
@@ -119,17 +118,6 @@ const AddTickect = () => {
             value={date} 
             onChange={(newDate) => setDate(newDate)} />
 
-          {/* <Grid>
-            <TextField
-                  onChange={(e) => setDate(e.target.value)}
-                  className='shadow-md mb-5'
-                  name="date"
-                  required
-                  value={date}
-                  fullWidth
-                  label='Date'
-                ></TextField>
-          </Grid> */}
         <Grid>
           <TextField
                   onChange={(e) => setArtist(e.target.value)}
@@ -192,7 +180,7 @@ const AddTickect = () => {
 
     </Grid>
       <Button 
-        className='bg-[#2dd4bf] disabled:opacity-25' 
+        className='bg-[#D0BCFF] disabled:opacity-25' 
         disabled={isDisabled} 
         type='submit' 
         fullWidth variant='contained' 

@@ -54,23 +54,23 @@ const EditTicket = ({id, avatar, name, date, artist, location, amount, price}: E
 
   return (
   <div >
-    <div className='bg-gray-300 my-8  p-8 rounded-lg'>
+    <div className='bg-[#E6E1E5] my-8  p-8 rounded-lg'>
       <div className='flex items-center gap-4'>
         <Image width={32} height={32} src={avatar} alt="avatar" className='rounded-full' />
         <h3 className='font-bold'>{name}</h3>
       </div>
 
       <div className='flex items-center gap-4'>
-        <p>{upperCaseLocation}</p>
-        <p>{upperCaseArtist}</p>
-        <p>{shorterDate}</p>
-        <p>{amount}</p>
-        <p>{`$${price}`}</p>
+        <p className='text-[#1C1B1F] text-xl'>{upperCaseLocation}</p>
+        <p className='text-[#1C1B1F] text-lg'>{upperCaseArtist}</p>
+        <p className='text-[#1C1B1F] text-lg'>{shorterDate}</p>
+        <p className='text-[#1C1B1F] text-lg'>{amount}</p>
+        <p className='text-[#1C1B1F] text-lg'>{`$${price}`}</p>
         <p>{id}</p>
       </div>
   
       <div className='flex items-center gap-4'>
-        <button onClick={(e) => setToggle(true)} className='bg-pink-800 my-2 p-2 rounded-md shadow-md text-sm font-bold text-white' >Delete</button>
+        <button onClick={(e) => setToggle(true)} className='bg-[#F2B8B5] my-2 p-2 rounded-md shadow-md text-sm font-bold text-white' >Delete</button>
       </div>
     </div>
     {toggle && <Toggle deleteTicket={deleteTicket} setToggle={setToggle}/>}

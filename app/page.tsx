@@ -15,7 +15,7 @@ export default function Home() {
           <h2 className="text-2xl pb-2">Never miss a show again</h2> 
           <h2 className="text-xl pb-7 font-bold">Get tickets to sold-out concerts</h2>
           <Link
-            className="bg-[#f472b6] text-black font-semibold py-4 px-16 shadow-lg rounded-md flex-2 w-64 text-center"
+            className="bg-[#EFB8C8] text-black font-semibold py-4 px-16 shadow-lg rounded-md flex-2 w-64 text-center"
             href='/buy'
           >
             GET TICKETS         
