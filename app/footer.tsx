@@ -10,11 +10,12 @@ const Footer = async () => {
   const session = await getServerSession(authOptions);
   console.log(session);
 
+ 
   return (
-    <footer className='z-10 bg-stone-300 py-4 text-center text-gray-600 uppercase'>
+    <footer className='flex justify-center items-center z-10  bg-stone-300 py-6 text-center text-gray-600 uppercase'>
       <div className='container'>
         <p className='text-sm pb-2'>{`@${now.getFullYear()} On-The-Spot App. All rights reserved`}</p>
-        <div className='flex items-center justify-center gap-8'>
+        <div className='flex items-center justify-around gap-8'>
           <ul className='flex ml-auto mr-auto items-center justify-center flex-col gap-1'>
             <li>
               <Link href='/'>Home</Link>

@@ -16,7 +16,15 @@ type Ticket = {
   ticketPrice: number
 }
 
-const Ticket = ({ avatar, name, ticketDate, ticketLocation, ticketArtist, ticketAmount, ticketPrice, id}: Ticket) => {
+const Ticket = ({ 
+  avatar, 
+  name, 
+  ticketDate, 
+  ticketLocation, 
+  ticketArtist, 
+  ticketAmount, 
+  ticketPrice, 
+  id}: Ticket) => {
 
   const [connectBtnClicked, setConnectBtnClicked] = useState(false);
 
@@ -40,7 +48,7 @@ const Ticket = ({ avatar, name, ticketDate, ticketLocation, ticketArtist, ticket
         </div>
         <div className="flex gap-4 cursor-pointer items-center">
           <button 
-            className="text-sm font-bold text-white bg-gray-700  my-6 py-2 px-4 rounded-lg shadow-lg "
+            className="text-sm font-bold text-white bg-gray-700 my-6 py-2 px-4 rounded-lg shadow-lg "
             onClick={handleToggleBtn}>Connect The Seller</button>
       
           {connectBtnClicked && (
