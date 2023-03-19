@@ -10,7 +10,6 @@ const Footer = async () => {
   const session = await getServerSession(authOptions);
   console.log(session);
 
- 
   return (
     <footer className='flex justify-center items-center z-10  bg-stone-300 py-6 text-center text-gray-600 uppercase'>
       <div className='container'>
@@ -29,7 +28,6 @@ const Footer = async () => {
             {!session?.user && <Login />}
             {/* {session?.user && <Logged image={session.user.image || ''}/>} */}
           </ul>
-
         </div>
       </div>
     </footer>
